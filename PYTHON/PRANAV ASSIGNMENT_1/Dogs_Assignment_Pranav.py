@@ -20,10 +20,16 @@ def menu():     # This function is for the menu, which displays the 2 possible o
 
                   
             f = open('dogs.txt','r')
+            #dogs = f.readlines()
+            dogs = f.read().splitlines()
             
             print(f.read())
-                       
+            print(dogs)
+            print(type(f))
+            print(type(dogs))
 
+            # temp = f.readlines()[:cardsnumber/2]
+            # print(temp)
 
     elif choice == "2":
         print ("You are now exiting the program, Thanks for playing!")
