@@ -1,3 +1,5 @@
+from random import randint
+
 def menu():     # This function is for the menu, which displays the 2 possible options for the user to play or quit. 
     print("Welcome to Celebrity Dogs: \n 1. Play the Game \n 2. Quit") # This displays the 2 possible options for the user to choose from.
     choice = input() # I am creating a variable for the user choice, whether it is 1, 2 or some other option. It is taking the choice as an input
@@ -20,16 +22,27 @@ def menu():     # This function is for the menu, which displays the 2 possible o
 
                   
             f = open('dogs.txt','r')
-            #dogs = f.readlines()
-            dogs = f.read().splitlines()
+            dogs = f.read().splitlines()    # Read lines from file into a list
             
-            print(f.read())
+            #print(f.read())
             print(dogs)
-            print(type(f))
             print(type(dogs))
 
-            # temp = f.readlines()[:cardsnumber/2]
-            # print(temp)
+            category = ['Exercise', 'Intelligence','Friendliness','Drool']  # Pre defined categories in a list
+            
+            i = 0
+            category_values = []   # List to store values for each category
+            
+            while i <= cardsnumber-1:
+                temp1 = []                      # Temporary list to store random generate values for each category
+                temp1.append(randint(1,5))      # Value for Exercise
+                temp1.append(randint(1,100))    # Value for Intelligence
+                temp1.append(randint(1,10))     # Value for Friendliness
+                temp1.append(randint(1,10))     # Value for Drool
+                category_values.append(temp1)   # Append random values into another list. This will give you list of lists
+                i = i + 1                       # Increment so you only generate values only for the number of cards the user wants to play with
+            print(category_values)
+
 
     elif choice == "2":
         print ("You are now exiting the program, Thanks for playing!")
