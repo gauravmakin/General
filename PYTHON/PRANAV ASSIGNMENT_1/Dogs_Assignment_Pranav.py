@@ -164,7 +164,7 @@ def display_players_cards(cardsnumber, deck, category, category_values):    # Fu
 cardsnumber = menu()
 dogs = read_file()
 
-category = ['Exercise', 'Intelligence','Friendliness','Drool']  # Pre defined categories in a list
+category = ['Exercise', 'Intelligence', 'Friendliness', 'Drool']  # Pre defined categories in a list
 
 category_values = create_category_values(cardsnumber)
 dogs_deck = create_deck(dogs, cardsnumber)
