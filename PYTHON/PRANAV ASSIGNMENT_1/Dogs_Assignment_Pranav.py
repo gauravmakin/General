@@ -73,7 +73,6 @@ def menu():     # This function is for the menu, which displays the 2 possible o
 #                  print("Comparing against the Computer...")
 #            else:
 #                  ("Value chosen is not valid, please try again")
-            
 
     elif choice == "2":
         print ("You are now exiting the program, Thanks for playing!")
@@ -138,16 +137,15 @@ def display_single_card(index, deck, category, category_values):    # Function t
         i = i + 1
 
 def display_players_cards(cardsnumber, deck, category, category_values):    # Function to display all the players cards
-    print('Your cards are - ')
+    print('\n\nYour cards are - ')
     deck_length = int(cardsnumber/2)
     category_length = len(category)
 
     i = 0
     while i < deck_length:
-        print('\nDog: \t', deck[i])
-        print('Attributes:')
+        print('\n', i+1, 'Dog: \t', deck[i])
+        print('   Attributes:')
         category_length = len(category)
-        print('\n')
         j = 0
         while j < category_length:
             print('\t', category[j], ' - \t', category_values[i][j])
