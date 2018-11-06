@@ -27,6 +27,7 @@ def menu():     # This function is for the menu, which displays the 2 possible o
             # print(dogs)
             # print(len(dogs))
 
+<<<<<<< HEAD
             # category = ['Exercise', 'Intelligence','Friendliness','Drool']  # Pre defined categories in a list
             
             # i = 0
@@ -75,6 +76,31 @@ def menu():     # This function is for the menu, which displays the 2 possible o
 #            else:
 #                  ("Value chosen is not valid, please try again")
             
+=======
+                  
+            f = open('dogs.txt','r')
+            dogs = f.read().splitlines()    # Read lines from file into a list
+            
+            #print(f.read())
+            print(dogs)
+            print(type(dogs))
+
+            category = ['Exercise', 'Intelligence','Friendliness','Drool']  # Pre defined categories in a list
+            
+            i = 0
+            category_values = []   # List to store values for each category
+            
+            while i <= cardsnumber-1:
+                temp1 = []                      # Temporary list to store random generate values for each category
+                temp1.append(randint(1,5))      # Value for Exercise
+                temp1.append(randint(1,100))    # Value for Intelligence
+                temp1.append(randint(1,10))     # Value for Friendliness
+                temp1.append(randint(1,10))     # Value for Drool
+                category_values.append(temp1)   # Append random values into another list. This will give you list of lists
+                i = i + 1                       # Increment so you only generate values only for the number of cards the user wants to play with
+            print(category_values)
+
+>>>>>>> ee960efd5690ff288545d2915e8c5ef6ad25fc65
 
     elif choice == "2":
         print ("You are now exiting the program, Thanks for playing!")
