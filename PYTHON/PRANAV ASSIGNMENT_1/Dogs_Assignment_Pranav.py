@@ -110,32 +110,28 @@ def play_game(cardsnumber, deck, category, category_values):
 #    return null
     # Need to display players top card here
     selected_attribute =  int(input('\n1 for Exercise.\n2 for Intelligence\n3 for Friendliness and\n4 for Drool\nEnter your Category: '))
+    
     if selected_attribute >= 1 and selected_attribute <= 3:
-        print(selected_attribute)
         players_dog = deck[0][0]
-        print(players_dog)
         players_value = category_values[0][0][selected_attribute-1]
-        print(players_value)
 
         computers_dog = deck[1][0]
-        print(computers_dog)
         computers_value = category_values[1][0][selected_attribute-1]
-        print(computers_value)
 
         if (players_value >= computers_value):
             print('Player Wins Hand')   # Player gets the card
             
             # Add computers card to list
             deck[0].append(deck[1][0])
+            deck[0].append(deck[0][0])
             category_values[0].append(category_values[1][0])
+            category_values[0].append(category_values[0][0])
 
             # Remove lost card from list
             deck[1].pop(0)
+            deck[0].pop(0)
             category_values[1].pop(0)
-
-            print(deck[0])
-            print(category_values[0])
-            print(deck[1])
+            category_values[0].pop(0)
             
         else:
             # Computer gets the card
@@ -149,22 +145,13 @@ def play_game(cardsnumber, deck, category, category_values):
             deck[0].pop(0)
             category_values[0].pop(0)
 
-            print(deck[1])
-            print(category_values[1])
-            print(deck[0])
-
     elif selected_attribute == 4:         # Drool is descending order
-        print(selected_attribute)
-        print(selected_attribute)
         players_dog = deck[0][0]
-        print(players_dog)
         players_value = category_values[0][0][selected_attribute-1]
-        print(players_value)
 
         computers_dog = deck[1][0]
-        print(computers_dog)
         computers_value = category_values[1][0][selected_attribute-1]
-        print(computers_value)
+
         
         if (players_value <= computers_value):
             print('Player Wins Hand')   # Player gets the card
@@ -176,10 +163,6 @@ def play_game(cardsnumber, deck, category, category_values):
             # Remove lost card from list
             deck[1].pop(0)
             category_values[1].pop(0)
-
-            print(deck[0])
-            print(category_values[0])
-            print(deck[1])
             
         else:
             # Computer gets the card
@@ -192,10 +175,6 @@ def play_game(cardsnumber, deck, category, category_values):
             # Remove top card from players deck
             deck[0].pop(0)
             category_values[0].pop(0)
-
-            print(deck[1])
-            print(category_values[1])
-            print(deck[0])
 
     else:
         #Wrong Selection
@@ -213,15 +192,16 @@ dogs = read_file()
 category = ['Exercise', 'Intelligence', 'Friendliness', 'Drool']  # Pre defined categories in a list
 
 category_values = create_category_values(cardsnumber)
-print(category_values)
 dogs_deck = create_deck(dogs, cardsnumber)
-print(dogs_deck)
 category_deck = create_category_deck(category_values, cardsnumber)
-print(category_deck)
-#display_players_cards(cardsnumber, dogs_deck[0], category, category_values)
-while (len(dogs_deck[0]) != 0 or len(dogs_deck[1]) != 0):
-    play_game(cardsnumber, dogs_deck, category, category_deck)
 
+counter = 0
+while (len(dogs_deck[0]) > 0 and len(dogs_deck[1]) > 0):
+    display_single_card(0,dogs_deck[0], category, category_values[0])
+    play_game(cardsnumber, dogs_deck, category, category_deck)
+    counter = counter + 1
+
+print('Number of hands played:\t', counter)
 if len(dogs_deck[0]) == 0:
     print('Computer Wins')
 else:
