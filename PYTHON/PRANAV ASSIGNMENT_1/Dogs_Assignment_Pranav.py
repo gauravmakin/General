@@ -5,32 +5,26 @@ def menu():     # This function is for the menu, which displays the 2 possible o
     choice = input() # I am creating a variable for the user choice, whether it is 1, 2 or some other option. It is taking the choice as an input
 
     if choice == "1": # The statement is looking, if the user chooses the first option and wants to play the game
-        cardsnumber = int(input("Please enter the number of cards you would like to play with :")) # I am creating a new variable for the cardsnumber which is being stored as an integer
-
+        cardsnumber = int(input("Please enter the number of cards you would like to play with.\nPlease enter even number between 4 and 30:\t")) # I am creating a new variable for the cardsnumber which is being stored as an integer
         mod = cardsnumber % 2 # I am using this to check if the number entered by the user is an even number or an odd number. It will use a percentage comparison with 2.
         if ((mod == 0) and (cardsnumber < 4 or cardsnumber > 30)): # I am using this IF statement to see that if the user has entered an even number but the number is not entered in range
-            #cardsnumber = 0
-            print("Please enter a number that is between 4 and 30") # This will tell th user to enter a number between range
-        #    menu()  #This will return the user to the menu
+            print("Please enter a number that is between 4 and 30. Please execute program again") # This will tell th user to enter a number between range
+            exit
 
         elif ((mod != 0) and (cardsnumber < 4 or cardsnumber > 30)):#This elif statement will work if the number entered is within range but is not an even number  
-            #cardsnumber = 0
-            print("Please enter a number that is even and is between 4 and 30") # This will now tell the user that the number entered is within range but is not an even number and the user needs an even number
-        #    menu() #This will return the user to the menu
-
+            print("Please enter a number that is even and is between 4 and 30. Please execute program again") # This will now tell the user that the number entered is within range but is not an even number and the user needs an even number
+            exit
         else:  #This else statement will work if the number entered is an even number and is within range
             print("Number is even and is within the limits, Starting Game...") #This will tell the user that the number is entered is completely valid and now the cards are about to generate      
-            return int(cardsnumber)
-
-
-
+            return cardsnumber
+        
     elif choice == "2":
         print ("You are now exiting the program, Thanks for playing!")
         exit
 
     else:
-        print("This is not a valid option, Please try again")
-        return menu()
+        print("This is not a valid option, Please execute program again.")
+        exit
 
 
 def read_file():                        # Function to read file
@@ -46,22 +40,7 @@ def check_number(cardsnumber):
     else:
         print('Goodbye')
         pass
-
-    # if cardsnumber == 0 and cardsnumber < 4 or cardsnumber > 30: # I am using this IF statement to see that if the user has entered an even number but the number is not entered in range
-    #         print("Please enter a number that is between 4 and 30") # This will tell th user to enter a number between range
-    #         #menu()  #This will return the user to the menu
-
-    # elif cardsnumber > 0 and cardsnumber < 4 or cardsnumber > 30:#This elif statement will work if the number entered is within range but is not an even number  
-    #         print("Please enter a number that is even and is between 4 and 30") # This will now tell the user that the number entered is within range but is not an even number and the user needs an even number
-    #         #menu() #This will return the user to the menu
-
-
-    # else:  #This else statement will work if the number entered is an even number and is within range
-    #         print("Number is even and is within the limits, Starting Game...") #This will tell the user that the number is entered is completely valid and now the cards are about to generate
-            
-
-
-
+           
 def create_category_values(cardsnumber2):    # Function to randomly generate values for the 4 categories for each card
     i = 0
     category_values = []   # List to store values for each category
@@ -107,7 +86,7 @@ def display_single_card(index, deck, category, category_values):    # Function t
     
     i = 0
     while i < category_length:
-        print('\t', category[i], ' - \t', category_values[i])
+        print('  ', category[i], ' - \t', category_values[i])
         i = i + 1
 
 def display_players_cards(cardsnumber, deck, category, category_values):    # Function to display all the players cards
@@ -122,29 +101,132 @@ def display_players_cards(cardsnumber, deck, category, category_values):    # Fu
         category_length = len(category)
         j = 0
         while j < category_length:
-            print('\t', category[j], ' - \t', category_values[i][j])
+            print('  ', category[j], ' - \t', category_values[i][j])
             j = j + 1
         i = i + 1
 
 
-#def play_game(deck, category_values):
+def play_game(cardsnumber, deck, category, category_values):
 #    return null
+    # Need to display players top card here
+    selected_attribute =  int(input('\n1 for Exercise.\n2 for Intelligence\n3 for Friendliness and\n4 for Drool\nEnter your Category: '))
+    if selected_attribute >= 1 and selected_attribute <= 3:
+        print(selected_attribute)
+        players_dog = deck[0][0]
+        print(players_dog)
+        players_value = category_values[0][0][selected_attribute-1]
+        print(players_value)
 
+        computers_dog = deck[1][0]
+        print(computers_dog)
+        computers_value = category_values[1][0][selected_attribute-1]
+        print(computers_value)
+
+        if (players_value >= computers_value):
+            print('Player Wins Hand')   # Player gets the card
+            
+            # Add computers card to list
+            deck[0].append(deck[1][0])
+            category_values[0].append(category_values[1][0])
+
+            # Remove lost card from list
+            deck[1].pop(0)
+            category_values[1].pop(0)
+
+            print(deck[0])
+            print(category_values[0])
+            print(deck[1])
+            
+        else:
+            # Computer gets the card
+            print('Computer Wins Hand')
+            
+            # Add players card to computers deck
+            deck[1].append(deck[0][0])
+            category_values[1].append(category_values[0][0])
+
+            # Remove top card from players deck
+            deck[0].pop(0)
+            category_values[0].pop(0)
+
+            print(deck[1])
+            print(category_values[1])
+            print(deck[0])
+
+    elif selected_attribute == 4:         # Drool is descending order
+        print(selected_attribute)
+        print(selected_attribute)
+        players_dog = deck[0][0]
+        print(players_dog)
+        players_value = category_values[0][0][selected_attribute-1]
+        print(players_value)
+
+        computers_dog = deck[1][0]
+        print(computers_dog)
+        computers_value = category_values[1][0][selected_attribute-1]
+        print(computers_value)
+        
+        if (players_value <= computers_value):
+            print('Player Wins Hand')   # Player gets the card
+
+            # Add computers card to list
+            deck[0].append(deck[1][0])
+            category_values[0].append(category_values[1][0])
+
+            # Remove lost card from list
+            deck[1].pop(0)
+            category_values[1].pop(0)
+
+            print(deck[0])
+            print(category_values[0])
+            print(deck[1])
+            
+        else:
+            # Computer gets the card
+            print('Computer Wins Hand')
+            
+            # Add players card to computers deck
+            deck[1].append(deck[0][0])
+            category_values[1].append(category_values[0][0])
+
+            # Remove top card from players deck
+            deck[0].pop(0)
+            category_values[0].pop(0)
+
+            print(deck[1])
+            print(category_values[1])
+            print(deck[0])
+
+    else:
+        #Wrong Selection
+        print('Invalid Selection. Please execute program again.')
+        exit
 
 #-----------------------------------------------------------------------#
 #                    MAIN PROGRAM                                       #
 #-----------------------------------------------------------------------#
 
-cardsnumber = menu()
-dogs = read_file()
 
+cardsnumber = int(menu())
+
+dogs = read_file()
 category = ['Exercise', 'Intelligence', 'Friendliness', 'Drool']  # Pre defined categories in a list
 
 category_values = create_category_values(cardsnumber)
+print(category_values)
 dogs_deck = create_deck(dogs, cardsnumber)
+print(dogs_deck)
 category_deck = create_category_deck(category_values, cardsnumber)
+print(category_deck)
 #display_players_cards(cardsnumber, dogs_deck[0], category, category_values)
+while (len(dogs_deck[0]) != 0 or len(dogs_deck[1]) != 0):
+    play_game(cardsnumber, dogs_deck, category, category_deck)
 
-display_single_card(0,dogs_deck[0], category, category_values[0])
+if len(dogs_deck[0]) == 0:
+    print('Computer Wins')
+else:
+    print('Player Wins')
+
+#display_single_card(0,dogs_deck[0], category, category_values[0])
 
 #play_game()
