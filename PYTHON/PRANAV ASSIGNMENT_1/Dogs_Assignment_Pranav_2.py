@@ -105,6 +105,7 @@ def game_against_computer():
     playercards = cardsnumber/2
     computercards = cardsnumber/2
 
+    last_winner = 1
     while True:
         player_intelligence = random.randint(1,100) 
         player_exercise = random.randint(1,5)
@@ -130,10 +131,15 @@ def game_against_computer():
         time.sleep(1)
         print(" 4 - The Drool value is: ",player_drool)
         time.sleep(1)
-        category = int(input("Please Select a category that you would like to compare against the computer: \n 1 for Intelligence \n 2 for Exercise \n 3 for Friendliness \n 4 for Drool \n Please choose: "))
-        time.sleep(0.5)
-        
+
+        if last_winner == 1:
+            category = int(input("Please Select a category that you would like to compare against the computer: \n 1 for Intelligence \n 2 for Exercise \n 3 for Friendliness \n 4 for Drool \n Please choose: "))
+            time.sleep(0.5)
+        else:
+            category = random.randint(1,4)
+            print('Computer Won last Round. Computer Selects category ', category)
             
+        
         if category == 1:
             print("Intelligence Value has been chosen!")
             time.sleep(0.5)
@@ -149,6 +155,7 @@ def game_against_computer():
             time.sleep(0.5)
             if computer_intelligence > player_intelligence:
                 print("Computer wins this round!")
+                last_winner = 2
                 time.sleep(0.5)
                 playercards = playercards - 1
                 computercards = computercards + 1
@@ -157,6 +164,7 @@ def game_against_computer():
                 y = 1
             elif computer_intelligence <= player_intelligence:               
                 print("Congratulations!, you have won this round.")
+                last_winner = 1
                 time.sleep(0.5)
                 playercards = playercards + 1
                 computercards = computercards - 1
@@ -174,6 +182,7 @@ def game_against_computer():
             
             if computer_exercise > player_exercise:                 
                 print("Computer wins this round!")
+                last_winner = 2
                 time.sleep(0.5)
                 playercards = playercards - 1
                 computercards = computercards + 1
@@ -181,6 +190,7 @@ def game_against_computer():
                 y = 1
             elif computer_exercise <= player_exercise:
                 print("Congratulations!, you have won this round")
+                last_winner = 1
                 time.sleep(0.5)
                 playercards = playercards + 1
                 computercards = computercards - 1
@@ -199,6 +209,7 @@ def game_against_computer():
              
             if computer_friendliness > player_friendliness:
                 print("Computer wins this round!")
+                last_winner = 2
                 time.sleep(0.5)
                 playercards = playercards- 1
                 computercards = computercards + 1
@@ -206,6 +217,7 @@ def game_against_computer():
                 y = 1
             elif computer_friendliness <= player_friendliness:
                 print("Congratulations!,you have won this round.")
+                last_winner = 1
                 time.sleep(0.5)
                 playercards = playercards + 1
                 computercards = computercards - 1
@@ -223,6 +235,7 @@ def game_against_computer():
             
             if computer_drool > player_drool:
                 print("Congratulations you have won this round!")
+                last_winner = 1
                 time.sleep(0.5)
                 playercards = playercards + 1
                 computercards = computercards - 1
@@ -230,6 +243,7 @@ def game_against_computer():
                 y = 1
             elif computer_drool <= player_drool:               
                 print("Computer wins this round!")
+                last_winner = 2
                 time.sleep(0.5)
                 playercards = playercards - 1
                 computercards = computercards + 1
